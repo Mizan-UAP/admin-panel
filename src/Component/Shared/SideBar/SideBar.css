@@ -1,0 +1,17 @@
+.products{
+    color: #fff;
+    background-color:  #131338;
+    height: 100vh;
+    width: 100%;
+    text-align: left;
+    padding-top: 2rem;
+    padding-left: 1.5rem;
+}
+li a{
+    color: #ffffff4f;
+    cursor: pointer;
+    text-decoration: none;
+}
+li a:hover{
+ color: #fff;
+}
