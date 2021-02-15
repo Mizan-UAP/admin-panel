@@ -6,3 +6,12 @@ a{
 a:hover{
     color: #fff;
 }
+th{
+    display: table-cell;
+    padding: 25px;
+    border-bottom: 1px solid gray;
+}
+td{
+    padding-left: 25px;
+    padding-top: 15px;
+}

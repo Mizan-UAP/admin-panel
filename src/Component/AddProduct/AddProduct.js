@@ -17,14 +17,14 @@ const AddProduct = () => {
 
     const handleSubmit = (event) => {
         const data = { ...productList };
-
-        fetch('http://localhost:5000/addItem', {
+        fetch('http://localhost:5000/addItems', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(data)
         })
             .then(response => response.json())
             .then(success => {
+                console.log(success);
                 alert('added successfully');
             })
 
@@ -69,6 +69,8 @@ const AddProduct = () => {
                         </select>
                         <input type="submit" value="Submit" />
                     </form>
+
+                    
                 </div>
 
             </div>
