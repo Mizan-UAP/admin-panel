@@ -9,7 +9,7 @@
 
 .B{
     grid-column: 4/12;
-    background-color: pink;
+    /* background-color: pink; */
     padding: 5%;
 }
 form{
@@ -17,7 +17,7 @@ form{
     
 }
 input{
-    height: auto;
+    height: 25px;
     width: 50%;
     margin: 1rem 0 1rem 0;
 }
