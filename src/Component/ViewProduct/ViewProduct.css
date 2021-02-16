@@ -12,6 +12,11 @@ th{
     border-bottom: 1px solid gray;
 }
 td{
-    padding-left: 25px;
+    /* padding-left: 25px; */
     padding-top: 15px;
+}
+td img{
+    height: 25px;
+    width: 25px;
+    cursor: pointer;
 }
