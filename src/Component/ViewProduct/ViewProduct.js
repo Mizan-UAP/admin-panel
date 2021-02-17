@@ -9,23 +9,27 @@ import updatePhoto from '../Images/update.png';
 const ViewProduct = (e) => {
     const [productData, setProductData] = useState([]);
 
+
     const handleUpdate = (id) => {
+        // alert('Do you want to update?');
         console.log(id)
     }
 
     //delete one item
-    const handleDelete = (id) => {
+    const handleDelete = (id, event) => {
+        //alert('Do you want to delete?');
+        console.log(typeof id);
         fetch(`/delete/${id}`, {
             method: 'DELETE'
         })
             .then(response => response.json())
             .then(result => {
                 if (result) {
-                    // event.target.parentNode.style.display = 'none';
-                    console.log(result);
+                    event.target.parentNode.style.display = 'none';
+                    console.log(result.deletedCount);
                 }
             })
-        console.log(id)
+
     }
 
 
@@ -34,7 +38,6 @@ const ViewProduct = (e) => {
             .then(response => response.json())
             .then(list => {
                 setProductData(list);
-
                 // console.log(list[0]);
                 // const contain = document.getElementById('item');
                 // list.forEach(ListItem => {
@@ -54,7 +57,6 @@ const ViewProduct = (e) => {
                 //     contain.appendChild(paragraph);
                 // })
             })
-
     }, [])
 
 
@@ -101,7 +103,7 @@ const ViewProduct = (e) => {
                                         </td>
                                         <td>
                                             <img
-                                                onClick={() => handleDelete(`${data._id}`)}
+                                                onClick={() => handleDelete('${data._id}')}
                                                 src={deletePhoto}
                                                 alt="delete"
                                             />

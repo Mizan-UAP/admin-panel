@@ -3,8 +3,10 @@ import Footer from '../Shared/Footer/Footer';
 import Header from '../Shared/Header/Header';
 import SideBar from '../Shared/SideBar/SideBar';
 import './AddProduct.css'
+import swal from 'sweetalert';
 
 const AddProduct = () => {
+   
     const [productList, setProductList] = useState({
         productName: '',
         manufacturerName: '',
@@ -24,11 +26,12 @@ const AddProduct = () => {
         })
             .then(response => response.json())
             .then(success => {
-                console.log(success);
-                alert('added successfully');
+                // console.log(success);
+                swal("Congratulations!", "A product has been added!", "success");                             
             })
 
-        console.log(data);
+        // console.log(data);
+       
         event.preventDefault();
     }
     const handleInput = (e) => {
