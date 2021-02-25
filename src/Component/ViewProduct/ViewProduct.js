@@ -9,28 +9,73 @@ import updatePhoto from '../Images/update.png';
 const ViewProduct = (e) => {
     const [productData, setProductData] = useState([]);
 
-
+    //Update one item
     const handleUpdate = (id) => {
         // alert('Do you want to update?');
-        console.log(id)
+        fetch(`http://localhost:5000/update/${id}`)
+            .then(response => response.json())
+            .then(result => {
+                // console.log(result);
+                const update = document.getElementById('update');
+                update.innerHTML = `
+                    <h3>Updating: ${result._id} </h3>
+                    Product Name: <input type="text" value = "${result.productName}" id="productName"> <br>
+                    Manufacturer Name: <input type="text" value = "${result.manufacturerName}" id="manufacturerName"><br>
+                    Manufacturer Brand: <input type="text" value = "${result.manufacturerBrand}" id="manufacturerBrand"><br>
+                    Price: <input type="text" value = "${result.price}" id="price"><br>                   
+                    Date: <input type="date" value = "${result.date}" id="date"><br>
+                    Category: <input type="text" value = "${result.category}" id="category"><br>
+                    <button onClick = "${() => UpdateSubmit(result._id)}">Submit</button>
+                    `
+            })
+        // console.log(id)
+
+    }
+
+
+    //Update Submittion
+    const UpdateSubmit = (id) => {
+
+        const productName = document.getElementById('productName').value;
+        const manufacturerName = document.getElementById('manufacturerName').value;
+        const manufacturerBrand = document.getElementById('manufacturerBrand').value;
+        const price = document.getElementById('price').value;
+        const date = document.getElementById('date').value;
+        const category = document.getElementById('category').value;
+        const user = { id, productName, manufacturerName, manufacturerBrand, price, date, category }
+        console.log(user);
+
+        // fetch(`/update/${id}`, {
+        //     method: 'PATCH',
+        //     headers: { 'content-type': 'application/json' },
+        //     body: JSON.stringify(user)
+        // })
+        //     .then(response => response.json())
+        //     .then(result => {
+        //         console.log(result);
+        //     })
+
     }
 
     //delete one item
-    const handleDelete = (id, event) => {
+    const handleDelete = (id) => {
         //alert('Do you want to delete?');
-        console.log(typeof id);
-        fetch(`/delete/${id}`, {
+        // console.log(id);
+        fetch(`http://localhost:5000/delete/${id}`, {
             method: 'DELETE'
         })
             .then(response => response.json())
             .then(result => {
+                // console.log(result);
                 if (result) {
-                    event.target.parentNode.style.display = 'none';
-                    console.log(result.deletedCount);
+                    let newData = productData.filter(item => item._id !== id);
+                    // console.log(newData);
+                    setProductData(newData);
                 }
             })
 
     }
+
 
 
     useEffect(() => {
@@ -87,7 +132,6 @@ const ViewProduct = (e) => {
                             {
                                 productData.map((data) => (
                                     <tr>
-
                                         <td>{data.productName}</td>
                                         <td>{data.manufacturerName}</td>
                                         <td>{data.manufacturerBrand}</td>
@@ -103,7 +147,7 @@ const ViewProduct = (e) => {
                                         </td>
                                         <td>
                                             <img
-                                                onClick={() => handleDelete('${data._id}')}
+                                                onClick={() => handleDelete(`${data._id}`)}
                                                 src={deletePhoto}
                                                 alt="delete"
                                             />
@@ -114,6 +158,9 @@ const ViewProduct = (e) => {
                         </tbody>
 
                     </table>
+                    <div id="update">
+                    </div>
+
                 </div>
 
             </div>
